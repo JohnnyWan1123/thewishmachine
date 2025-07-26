@@ -1,8 +1,8 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, Text
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, Session
 from pydantic import BaseModel
 from datetime import datetime
 import os
@@ -61,7 +61,7 @@ def get_db():
         db.close()
 
 @app.post("/api/wishes", response_model=WishResponse)
-def create_wish(wish: WishCreate, db: SessionLocal = next(get_db())):
+def create_wish(wish: WishCreate, db: Session = Depends(get_db)):
     """Create a new wish"""
     db_wish = Wish(name=wish.name, wish=wish.wish)
     db.add(db_wish)
@@ -70,13 +70,13 @@ def create_wish(wish: WishCreate, db: SessionLocal = next(get_db())):
     return db_wish
 
 @app.get("/api/wishes", response_model=list[WishResponse])
-def get_wishes(db: SessionLocal = next(get_db())):
+def get_wishes(db: Session = Depends(get_db)):
     """Get all wishes"""
     wishes = db.query(Wish).order_by(Wish.created_at.desc()).all()
     return wishes
 
 @app.get("/api/wishes/{wish_id}", response_model=WishResponse)
-def get_wish(wish_id: int, db: SessionLocal = next(get_db())):
+def get_wish(wish_id: int, db: Session = Depends(get_db)):
     """Get a specific wish by ID"""
     wish = db.query(Wish).filter(Wish.id == wish_id).first()
     if wish is None:
@@ -84,7 +84,7 @@ def get_wish(wish_id: int, db: SessionLocal = next(get_db())):
     return wish
 
 @app.delete("/api/wishes/{wish_id}")
-def delete_wish(wish_id: int, db: SessionLocal = next(get_db())):
+def delete_wish(wish_id: int, db: Session = Depends(get_db)):
     """Delete a wish by ID"""
     wish = db.query(Wish).filter(Wish.id == wish_id).first()
     if wish is None:
