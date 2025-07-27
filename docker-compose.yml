@@ -25,6 +25,12 @@ services:
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/"]
       interval: 30s
