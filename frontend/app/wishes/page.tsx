@@ -24,7 +24,7 @@ export default function WishesPage() {
 
   const fetchWishes = async () => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://47.239.255.202:8000'
       const response = await fetch(`${apiUrl}/api/wishes`)
       if (response.ok) {
         const data = await response.json()
@@ -41,7 +41,7 @@ export default function WishesPage() {
 
   const deleteWish = async (id: number) => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://47.239.255.202:8000'
       const response = await fetch(`${apiUrl}/api/wishes/${id}`, {
         method: 'DELETE'
       })
@@ -89,17 +89,17 @@ export default function WishesPage() {
         </div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-8">
+      <div className="relative z-10 container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center text-purple-200 hover:text-yellow-400 mb-4 transition-colors">
             <ArrowLeft className="w-5 h-5 mr-2" />
             返回许愿机
           </Link>
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-4">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-4">
             愿望星空
           </h1>
-          <p className="text-purple-200 text-lg">✨ 所有美好的愿望都在这里 ✨</p>
+          <p className="text-purple-200 text-base sm:text-lg">✨ 所有美好的愿望都在这里 ✨</p>
         </div>
 
         {/* Error message */}
@@ -110,7 +110,7 @@ export default function WishesPage() {
         )}
 
         {/* Wishes Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {wishes.map((wish) => (
             <Card key={wish.id} className="bg-gradient-to-b from-purple-800/90 to-indigo-800/90 backdrop-blur-sm border-2 border-yellow-400/50 shadow-2xl shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-300">
               <div className="p-6">
