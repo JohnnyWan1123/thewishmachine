@@ -147,7 +147,7 @@ export default function WishesPage() {
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🌟</div>
             <p className="text-purple-200 text-xl mb-2">还没有愿望</p>
-            <p className="text-purple-300">成为第一个许愿的人吧！</p>
+            <p className="text-purple-300">小猫小猫快许愿叭！</p>
           </div>
         )}
 

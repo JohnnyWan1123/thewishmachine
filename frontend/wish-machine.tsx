@@ -108,6 +108,7 @@ export default function Component() {
                 <Wand2 className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 scale-x-[-1]" />
               </div>
               <p className="text-purple-200 text-base sm:text-lg font-medium">{"✨ 许下心愿，见证奇迹发生 ✨"}</p>
+              <p className="text-purple-200 text-base sm:text-lg font-medium">{"✨ 龙小猫专属 ✨"}</p>
             </div>
 
             {/* Machine Display */}
@@ -121,12 +122,12 @@ export default function Component() {
                 ) : isSubmitting ? (
                   <div className="text-center">
                     <div className="animate-spin text-3xl sm:text-4xl mb-2">✨</div>
-                    <p className="text-purple-300 text-base sm:text-lg">正在将您的愿望传送至宇宙深处...</p>
+                    <p className="text-purple-300 text-base sm:text-lg">正在将愿望传送至宇宙深处...</p>
                   </div>
                 ) : (
                   <div className="text-center">
                     <div className="text-3xl sm:text-4xl mb-2">🔮</div>
-                    <p className="text-purple-300 text-base sm:text-lg">水晶球正在等待您的心愿...</p>
+                    <p className="text-purple-300 text-base sm:text-lg">水晶球正在等待龙小猫的心愿...</p>
                   </div>
                 )}
               </div>
@@ -176,8 +177,8 @@ export default function Component() {
 
             {/* Machine Footer */}
             <div className="text-purple-300 text-xs sm:text-sm">
-              <p className="mb-2">{"🌙 由古老魔法与星尘驱动 🌙"}</p>
-              <p className="text-xs opacity-75 mb-3 sm:mb-4">{"每个愿望都珍贵无比，将被送达只属于你的魔法小狗"}</p>
+              <p className="mb-2">{"🌙 由古老魔法与星尘还有来自小狗的爱驱动 🌙"}</p>
+              <p className="text-xs opacity-75 mb-3 sm:mb-4">{"每个愿望都珍贵无比，将被送达到只属于你的魔法小狗"}</p>
               
               {/* Navigation to wishes page */}
               <Link 
