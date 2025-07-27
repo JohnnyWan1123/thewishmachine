@@ -44,12 +44,17 @@ app = FastAPI(title="Wish Machine API", version="1.0.0")
 
 # CORS middleware
 CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
+# Add wildcard for development/testing
+if not any("*" in origin for origin in CORS_ORIGINS):
+    CORS_ORIGINS.append("*")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=CORS_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 # Dependency to get database session
@@ -59,6 +64,11 @@ def get_db():
         yield db
     finally:
         db.close()
+
+@app.options("/api/wishes")
+def options_wishes():
+    """Handle preflight requests for wishes endpoint"""
+    return {"message": "OK"}
 
 @app.post("/api/wishes", response_model=WishResponse)
 def create_wish(wish: WishCreate, db: Session = Depends(get_db)):
@@ -82,6 +92,11 @@ def get_wish(wish_id: int, db: Session = Depends(get_db)):
     if wish is None:
         raise HTTPException(status_code=404, detail="Wish not found")
     return wish
+
+@app.options("/api/wishes/{wish_id}")
+def options_wish(wish_id: int):
+    """Handle preflight requests for individual wish endpoint"""
+    return {"message": "OK"}
 
 @app.delete("/api/wishes/{wish_id}")
 def delete_wish(wish_id: int, db: Session = Depends(get_db)):

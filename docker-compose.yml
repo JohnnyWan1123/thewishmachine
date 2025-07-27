@@ -7,7 +7,7 @@ services:
       - "8000:8000"
     environment:
       - DATABASE_URL=sqlite:///./wishes.db
-      - CORS_ORIGINS=http://小狗许愿机.top,http://www.小狗许愿机.top,http://47.239.255.202:3000,http://172.25.222.93:3000
+      - CORS_ORIGINS=http://小狗许愿机.top,http://www.小狗许愿机.top,http://47.239.255.202:3000,http://172.25.222.93:3000,http://localhost:3000
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/"]
