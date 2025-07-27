@@ -6,9 +6,9 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend/wishes.db:/app/wishes.db
+      - ./backend/data:/app/data
     environment:
-      - DATABASE_URL=sqlite:///./wishes.db
+      - DATABASE_URL=sqlite:///./data/wishes.db
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/"]

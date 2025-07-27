@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wish-machine-backend"
+version = "1.0.0"
+description = "Backend API for the Wish Machine application"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    {name = "Wish Machine Team"}
+]
+dependencies = [
+    "fastapi==0.104.1",
+    "uvicorn==0.24.0",
+    "sqlalchemy==2.0.23",
+    "pydantic==2.5.0",
+    "python-multipart==0.0.6",
+    "gunicorn==21.2.0",
+    "asyncpg>=0.28.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "httpx>=0.24.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=7.2.0",
+]
+
+[project.scripts]
+wish-machine = "main:app"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"] 
