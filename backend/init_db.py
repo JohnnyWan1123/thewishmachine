@@ -9,16 +9,9 @@ import sqlite3
 from pathlib import Path
 
 def init_database():
-    """Initialize the database directory and file."""
-    # Create data directory if it doesn't exist
-    data_dir = Path("./data")
-    data_dir.mkdir(exist_ok=True)
-    
-    # Ensure the directory has proper permissions
-    os.chmod(data_dir, 0o755)
-    
+    """Initialize the database file."""
     # Create database file if it doesn't exist
-    db_path = data_dir / "wishes.db"
+    db_path = Path("./wishes.db")
     
     if not db_path.exists():
         # Create the database file
@@ -28,8 +21,13 @@ def init_database():
     else:
         print(f"Database file already exists: {db_path}")
     
-    # Set proper permissions on the database file
-    os.chmod(db_path, 0o644)
+    # Try to set permissions, but don't fail if we can't
+    try:
+        os.chmod(db_path, 0o644)
+        print(f"Set permissions on database file: {db_path}")
+    except PermissionError:
+        print(f"Warning: Could not set permissions on {db_path} (this is normal in Docker)")
+    
     print("Database initialization completed successfully!")
 
 if __name__ == "__main__":
